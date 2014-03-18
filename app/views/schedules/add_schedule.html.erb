@@ -1,0 +1,82 @@
+
+<div style="margin-top:60px;margin-left:150px;">
+<%= form_tag "add_schedule", :method=>"post" do %>
+  <table>
+    <tr>
+	    <td>
+	      <%= label_tag :room_name , "会议室："%>	        
+	    </td>
+	    <td>
+	      <%= select_tag(:room_name, options_for_select(@rooms, "W201")) %>
+	    </td>
+    </tr>
+    <tr>
+    	<td>
+    	  <%= label_tag :title , "会议名称："%>
+    	</td>
+    	<td>
+    		<%= text_field_tag :title ,"", :class=>"add_schedule_name" %>
+    	</td>
+    </tr>
+<!--<tr>
+    	<td>
+    	  <%= label_tag :user_name , "申请人："%>
+    	</td>
+    	<td>
+    		<%= text_field_tag :user_name , @user.name %>
+    	</td>
+    </tr> -->
+    <tr>
+    	<td>
+    	  <%= label_tag :schedule_day , "日期选择："%>
+    	</td>
+    	<td>
+    		<%= text_field_tag :schedule_day , "" , :class=>"datepicker" %> 
+    	</td>
+    </tr>
+    <tr>
+    	<td>
+    	  <%= label_tag :start_time , "开始时间："%>
+    	</td>
+    	<td>
+    		 <%= select_tag(:start_time, options_for_select([ "8:00", "8:30", "9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30"], "8:00")) %>
+    	</td>
+    </tr>
+    <tr>
+    	<td>
+    	  <%= label_tag :end_time , "结束时间："%>
+    	</td>
+    	<td>
+    		<%= select_tag(:end_time, options_for_select(["8:30", "9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00"], "9:00")) %>
+    	</td>
+    </tr>
+    <tr>
+    	<td>
+    	  <%= label_tag :comment , "备注："%>
+    	</td>
+    	<td>
+    		<%= text_area_tag :comment %>
+    	</td>
+    </tr>
+    <tr>
+    	<td>
+    		<%= submit_tag "预定" ,:class => 'btn', :name => "btnnew", :class=>"btnnew"%>
+    	</td>
+    	<td>
+    		<font style="color: green"><%= @ok %><%= @error%></font>
+    	</td>
+    </tr>
+  </table>
+<% end %>
+
+</div>
+<script>
+  $(document).ready(function() {
+    $(".btnnew").click(function{
+        if($(.add_schedule_name).val().trim()==""){
+            $(this).css("border-color", "red");
+            return false;
+        }
+    })
+  });
+</script>

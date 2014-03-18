@@ -1,0 +1,48 @@
+<div style="margin-left:50px;">
+<%= form_for(@user) do |f| %>
+<table>
+    <tr>
+      <td>工号</td>
+      <td><%= f.text_field :number %></td>
+    </tr>
+    <tr>
+      <td>姓名</td>
+      <td><%= f.text_field :name %> </td>
+    </tr>
+    <tr>
+      <td>邮件</td>
+      <td><%= f.text_field :email%> </td>
+    </tr>
+    <tr>
+      <td>分机号</td>
+      <td><%= f.text_field :tel %> </td>
+    </tr>
+    <tr>
+      <td>事业部</td>
+      <td><%= f.select(:b_department,options_for_select(@bd_names,@user.b_department)) %></td>
+    </tr>
+    <tr>
+      <td>开发部</td>
+      <td><%= f.select(:d_department,options_for_select(@dd_names,@user.b_department)) %></td>
+    </tr>
+    <tr>
+      <td>员工类型</td>
+      <td><%= f.select(:user_type,options_for_select(@ut_names,@user.user_type)) %></td>
+    </tr> 
+    <tr>
+      <td>职位</td>
+      <td><%= f.select(:position,options_for_select(@pt_names,@user.position)) %></td>
+    </tr>
+    <tr>
+      <td><%= f.radio_button(:superuser,true) %><td>
+      特权用户
+    </tr>
+    <tr>
+      <td>
+        <%= submit_tag "更新" ,:class => 'btn' %>|
+      </td>
+      <td><%= link_to '返回', users_path, :class=>"btn"%></td>
+    </tr>
+  </table>
+<% end %>
+</div>

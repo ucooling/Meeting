@@ -1,0 +1,66 @@
+<div style="margin-top:0px;margin-left:100px;">
+<%= form_for(@room) do |f| %>
+<table>
+    <tr>
+      <td>会议室</td>
+      <td> <%= f.text_field :room_name %></td>     
+    </tr>
+    <tr>
+      <td>楼层</td>
+      <td><%= f.number_field :room_floor %></td>
+    </tr>
+    <tr>
+      <td>IP地址</td>
+      <td><%= f.text_field :tv_ip %> </td>     
+    </tr>
+    <tr>
+      <td>电视</td>
+      <td><%= f.check_box :tv %> </td>
+    </tr>
+    <tr>
+      <td>投影仪</td>
+      <td><%= f.check_box :projector %></td>     
+    </tr>
+    <tr>
+      <td>电脑</td>
+      <td><%= f.check_box :pc %></td>
+    </tr>
+    <tr>
+      <td>摄像头</td>
+      <td><%= f.check_box :webcam %></td>      
+    </tr> 
+    <tr>
+      <td>有无电话</td>
+      <td><%= f.check_box :tel %></td>
+    </tr>
+    <tr>
+      <td>隔音</td>
+      <td><%= f.check_box :sound_proofing %></td>      
+    </tr>
+    <tr>
+      <td>空调</td>
+      <td><%= f.check_box :air_condition %></td>
+    </tr>
+    <tr>
+      <td>白板</td>
+      <td><%= f.check_box :whiteboard %></td>
+    </tr>
+    <tr>
+      <td>最大人数</td>
+      <td><%= f.number_field :max_volume %></td>
+    </tr>
+    <tr>
+      <td>电话号码</td>
+      <td><%= f.text_field :tel_num %></td>
+    </tr>
+    <tr>
+      <td><%= f.submit "更新" , :class=>"btn"%></td>
+      <td><%= link_to '返回', rooms_path, :class=>"btn"%></td>
+    </tr>
+   
+  </table>
+</div>
+<!--   <div class="actions">
+    <%= f.submit "更新" %>
+  </div> -->
+<% end %>

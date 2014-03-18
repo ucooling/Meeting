@@ -1,0 +1,65 @@
+<script type="text/javascript">
+    $(function() {
+      $("#yourinput").datepicker( "setDate" , "<%= @schedule.schedule_day%>" );
+  });
+</script>
+<div style="margin-top:60px;margin-left:150px;">
+<%= form_tag @schedule.id.to_s, :method=>"post" do %>
+  <table>
+    <tr>
+	    <td>
+	      <%= label_tag :room_name , "会议室："%>	        
+	    </td>
+	    <td>
+	      <%= select_tag(:room_name, options_for_select([ "W201", "W202", "W203","W204","W205","W206","W207" ], @scheduledetail["room_name"])) %>
+	    </td>
+    </tr>
+    <tr>
+    	<td>
+    	  <%= label_tag :title , "会议名称："%>
+    	</td>
+    	<td>
+    		<%= text_field_tag :title,@scheduledetail["title"] %>
+    	</td>
+    </tr>
+    <tr>
+    	<td>
+    	  <%= label_tag :schedule_day , "日期选择："%>
+    	</td>
+    	<td>
+    		<%= text_field_tag :schedule_day ,"" , :class=>"datepicker" ,:id => "yourinput" %>
+    	</td>
+    </tr>
+    <tr>
+    	<td>
+    	  <%= label_tag :start_time , "开始时间："%>
+    	</td>
+    	<td>
+    		 <%= select_tag(:start_time, options_for_select([ "8:00", "8:30", "9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30"], @scheduledetail["start_time"])) %>
+    	</td>
+    </tr>
+    <tr>
+    	<td>
+    	  <%= label_tag :end_time , "结束时间："%>
+    	</td>
+    	<td>
+    		<%= select_tag(:end_time, options_for_select(["8:30", "9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00"], @scheduledetail["end_time"])) %>
+    	</td>
+    </tr>
+    <tr>
+    	<td>
+    	  <%= label_tag :comment , "备注："%>
+    	</td>
+    	<td>
+    		<%= text_area_tag :comment,@scheduledetail["comment"] %>
+    	</td>
+    </tr>
+    <tr>
+    	<td>
+    		<%= submit_tag "保存修改" ,:class => 'btn', :name => "btnupdate"%> 		
+    	</td>
+    	<td><font style="color: red"><%= @error%></font></td>
+    </tr>
+  </table>
+<% end %>
+</div>

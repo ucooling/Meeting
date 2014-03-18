@@ -1,0 +1,32 @@
+<table class="table table-bordered table-hover">
+  <tr>
+    <th>会议室</th>
+    <th>主题</th>
+    <th>时间</th>
+    <th>开始</th>
+    <th>结束</th>
+    <th>申请人</th>
+    <th>备注</th>
+
+  </tr>
+
+<% @schedules.each do |schedule| %>
+  <tr>
+    <td><%= (Room.find_by_id(schedule.room_id)).room_name %></td>
+    <td><%= schedule.title %></td>
+    <td><%= schedule.schedule_day %></td>
+    <td><%= schedule.start_time %></td>
+    <td><%= schedule.end_time %></td>
+    <td><%= (User.find(schedule.user_id)).name %></td>
+    <td></td>
+  </tr>
+<% end %>
+</table>
+<div style="text-align: center;color: gray">
+    <div class="digg_pagination">
+        <div class="page_info">
+            共找到<%=@schedules.total_entries %>条记录,共<%= @schedules.total_pages%>页
+        </div> 
+        <%= will_paginate @schedules ,:container => false,:previous_label => '<<上一页', :next_label => '下一页>>' %>
+    </div>  
+</div>

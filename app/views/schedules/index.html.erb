@@ -1,0 +1,149 @@
+<script>
+  $("document").ready(function() {
+  	<% @params.each do |param|%>
+    $("#<%= param["time"][0] %>").addClass("backg");
+    $("#<%= param["time"][0] %>")[0].setAttribute("rowspan",<%= param["time"].size %>);
+    $("#<%= param["time"][0] %>")[0].innerHTML= "<span class='info'><small style='color:gray'>预约人:</small><%= param['username']%></span>" ;
+    <% (1..param["time"].size-1).each do |i|%> 
+    //alert("<%= param["time"] %>");     
+      $("#<%= param["time"][i] %>").remove();
+    <% end %>
+    <% end %>
+  });
+  
+  // $("document").ready(function(){
+  // 	$(".info").click(function(){
+  // 		alert("hello!*-*");
+  // 	})
+  // });
+  $("document").ready(function(){
+
+    $(".datepicker tr td").click(function(){
+      var date_time1 = $(".datepicker").val();
+      $(".date_time").value=date_time1
+      window.location.href= '/schedules/index?datetime=' + $(".datepicker").val();
+      $(".datepicker").datepicker("setDate",date_time1);
+    });
+
+    $(".schedule .table_index tr:odd").addClass("odd");
+
+    $(".info").mouseover(function(e){
+      var p_x = e.pageX;
+      var p_y = e.pageY;
+      $(".pic").css("position","absolute");
+      $(".pic").css("left",p_x);
+      $(".pic").css("top",p_y);
+      $(".pic").css("border","1px solid #CCC");
+      $(".pic").css("width","170px");
+      $(".pic").css("height","150px");
+      $(".pic").css("background","#CCFFCC");
+      $(".pic").css("text-align","center");
+      $(".pic").fadeIn();
+    }).mouseout(function(){
+      $(".pic").fadeOut();
+    })
+
+  });
+</script>
+
+<style type="text/css">
+.schedule .table_index
+{
+border-collapse:collapse;
+}
+.schedule .table_index th td 
+{
+border: 1px solid black;
+}
+.schedule .table_index tr{
+  width:auto;
+}
+.schedule .table_index td{
+  min-width:100px;
+  height: 21px;
+  text-align: center;
+  border:dotted 1px gray;
+  border-left-style: groove;
+  border-width: 1px;
+}
+.odd{
+  border-top-style:solid;
+  border-width:1px;
+}
+.backg{
+  background-color: #ccffff;
+}
+.schedule_floor{
+  margin-top: 5px;
+  margin-left: 20px;
+}
+.xxx{
+  display: inline;
+  position: absolute;
+  margin-top: 200px ;
+  margin-left: 300px;
+
+}
+.schedule_width{
+  width:50px;
+  display:inline;
+}
+</style>
+<div class="schedule">
+<%=raw xx %>
+<div class="schedule-find" style="text-align: center">
+  <%= form_tag "index?date="+@date, :method=>"post" do %>
+    <%= check_box_tag "projector",1,false,:class=>"schedule_width"%>
+    <%= label_tag(:projector, "投影仪", :class=>"schedule_width") %>
+    <%= check_box_tag("whiteboard",1,:class=>"schedule_width") %>
+    <%= label_tag(:whiteboard, "白板", :class=>"schedule_width") %>
+    <%= check_box_tag("pc",1, :class=>"schedule_width")%>
+    <%= label_tag(:pc, "PC", :class=>"schedule_width") %>
+    <%= check_box_tag("webcam",1,false, :class=>"schedule_width") %>
+    <%= label_tag(:webcam, "摄像头",:class=>"schedule_width") %>  
+    <%= check_box_tag("tel",1, :class=>"schedule_width")%>
+    <%= label_tag(:tel, "电话",:class=>"schedule_width") %>
+    <%= check_box_tag("tv",1,false, :class=>"schedule_width") %>
+    <%= label_tag(:tv, "TV",:class=>"schedule_width") %>  
+    <%= check_box_tag("air_condition",1, :class=>"schedule_width")%>
+    <%= label_tag(:air_condition, "空调", :class=>"schedule_width") %>
+    <%= check_box_tag("sound_proofing",1,false, :class=>"schedule_width") %>&nbsp;&nbsp;
+    <%= label_tag(:sound_proofing, "隔音",:class=>"schedule_width") %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+    <%= select_tag(:schedule_condition, options_for_select([['第一层', 1],['第二层', 2],['第三层', 3],['第四层', 4],['第五层', 5],['第六层', 6]], 2), :style=>"width:140px;height:25px;margin-top:5px;") %>
+    <%= submit_tag "筛选" , :disable_with => "请等待……", :style=>"margin-left:30px;height:25px;margin-top:-5px;background-color:#34bbbb;" , :name=>"btnsearch" %>
+  <% end %>
+</div>
+<div>
+<table class="table_index" style="width:auto;">
+  <tr>
+    <td></td>
+  </tr>
+  <% @arr.each do |key,value| %> 
+    <tr>
+      <td id="value" style="background:#F0F0F0; font-size:1.2em;"><%= value %></td>
+    </tr>
+  <% end %>  
+</table>
+</div>
+<div style="overflow-x:auto;width:88%;margin-top:-530px;margin-left:105px;">
+<table class="table_index" style="width:auto;" >
+  <tr>
+    <!-- <td></td> -->
+  <% @room.each_with_index do |room,index| %>
+    <td  style="background:#F0F0F0; font-size:1.2em;"><%= room %></td>
+  <% end %>
+  </tr>
+<% @arr.each do |key,value| %> 
+  <tr>
+    <!-- <td id="value"><%= value %></td> -->
+    <% @room.each_with_index do |room,index| %>
+    <td id="<%= key %>-<%= index %>"></td>
+  <% end %>
+  </tr>
+<% end %>
+</table>
+</div>
+<div class="pic" style="border:1px solid 10px;width:120px;height:80px;display:none;"></div>
+</div>
+<script>
+</script>

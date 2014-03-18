@@ -1,0 +1,47 @@
+<div>
+  <table class="table table-bordered table-hover" style="text-align:center;">
+    <tr>
+      <td>工号</td>
+      <td><%= @user.number %></td>
+    </tr>
+    <tr>
+      <td>姓名</td>
+      <td><%= @user.name %></td>
+    </tr>
+    <tr>
+      <td>邮件</td>
+      <td><%= @user.email %></td>
+    </tr>
+    <tr>
+      <td>电话</td>
+      <td><%= @user.tel %></td>
+    </tr>
+    <tr>
+      <td>事业部</td>
+      <td><%= @user[:b_department_name] %></td>
+    </tr>
+        <tr>
+      <td>开发部</td>
+      <td><%= @user[:d_department_name] %></td>
+    </tr>
+    <tr>
+      <td>职位</td>
+      <td><%= @user[:position_name] %></td>
+    </tr>
+    <tr>
+      <td>人员类型</td>
+      <td><%= @user[:user_type_name] %></td>
+    </tr>
+    <tr>
+      <td>密码</td>
+      <td><%= @user.password %></td>
+    </tr>
+    <tr>
+      <td>特权用户</td>
+      <td><%= @user.superuser %></td>
+    </tr>
+  </table>
+</div>
+
+<%= link_to '修改', edit_user_path(@user) , :class=>"btn button" %> |
+<%= link_to '返回', users_path, :class=>"btn button" %>

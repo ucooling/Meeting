@@ -1,0 +1,42 @@
+<%= form_tag "my_schedule" do %>
+<table class="table table-hover table-striped">
+	<tr>
+		<th>选择</th>
+		<th>会议名称</th>
+		<th>会议室</th>
+		<th>日期</th>
+		<th>开始时间</th>
+		<th>结束时间</th>
+		<th>操作</th>
+	</tr>
+	<% @schedules.each do |schedule|%>
+	<tr>
+		<td><%= check_box_tag "scheduleid[]",schedule.id%></td>
+		<td><%= schedule.title%></td>
+		<td><%= Room.find(schedule.room_id).room_name%></td>
+		<td><%= schedule.schedule_day%></td>
+		<td><%= schedule.start_time%></td>
+		<td><%= schedule.end_time%></td>
+		<td><%= link_to '修改',:action => 'update_schedule',:id => schedule.id,:style => "color:gary"%></td>
+		<!--td>
+			<%= button_to("删除", {:action => 'delete_schedule',:id => schedule.id}, {:onclick => "return confirm('Are you sure?')", :method => :accept_question, :remote => true}) %>
+		</td-->
+	</tr>
+	<% end %>		
+	<tr>
+		<td><%= submit_tag "删除选中项",:name => 'btnselect',:onclick => "return confirm('Are you sure?')"%></td>
+	</tr>
+	<tr>
+		<small style="color: red"><%= @info%></small>
+	</tr>
+</table>
+<% end %>
+<div style="text-align: center;color: gray">
+	<div class="digg_pagination">
+		<div class="page_info">
+			共找到<%=@schedules.total_entries %>条记录,共<%= @schedules.total_pages%>页
+		</div> 
+		<%= will_paginate @schedules ,:container => false,:previous_label => '<<上一页', :next_label => '下一页>>' %>
+	</div>	
+</div>
+

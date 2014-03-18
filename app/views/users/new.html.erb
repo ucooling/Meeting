@@ -1,0 +1,52 @@
+<div style="margin-top:0px;margin-left:200px;">
+<%= form_tag :action => 'create' do %>
+<table>
+  	<tr>
+  		<td><label for="number">工号:</label> </td>
+  		<td><%= text_field_tag :number %></td>
+  	</tr>
+  	<tr>
+  		<td><label for="name">姓名:</label> </td>
+  		<td><%= text_field_tag :name, params[:name] %> </td>
+  	</tr>
+  	<tr>
+  		<td><label for="email">邮件:</label> </td>
+  		<td><%= text_field_tag :email, params[:email] %> </td>
+  	</tr>
+  	<tr>
+  		<td><label for="tel">分机号:</label> </td>
+  		<td><%= text_field_tag :tel, params[:tel] %> </td>
+  	</tr>
+  	<tr>
+  		<td><label for="b_department">事业部:</label> </td>
+  		<td><%= select_tag(:b_department,options_for_select(@bd_names)) %></td>
+  	</tr>
+  	<tr>
+  		<td><label for="b_department">开发部:</label> </td>
+  		<td><%= select_tag(:d_department,options_for_select(@dd_names)) %></td>
+  	</tr>
+  	<tr>
+  		<td><label for="use_type">员工类型:</label> </td>
+  		<td><%= select_tag(:user_type,options_for_select(@ut_names)) %></td>
+  	</tr>	
+  	<tr>
+  		<td><label for="position">职位:</label> </td>
+  		<td><%= select_tag(:position,options_for_select(@pt_names)) %></td>
+  	</tr>
+    <tr>
+      <td><%= radio_button_tag(:superuser,true) %><td>
+      <%= label_tag(:superuser,"特权用户") %>
+    </tr>
+  	<tr>
+    	<td>
+    		<%= submit_tag "确认" ,:name => "btnchgpwd",:class => 'btn' %>
+    	</td>
+      <td><%= link_to '返回', users_path, :class=>"btn button" %></td>
+    </tr>
+  </table>
+<% end %>
+</div>
+
+
+
+

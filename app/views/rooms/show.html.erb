@@ -1,0 +1,60 @@
+<div>
+  <table class="table table-bordered table-hover" style="text-align:center;">
+    <tr>
+      <td>会议室</td>
+      <td><%= @room.room_name %></td>
+    </tr>
+    <tr>
+      <td>楼层</td>
+      <td><%= @room.room_floor %></td>
+    </tr>
+    <tr>
+      <td>IP地址</td>
+      <td><%= @room.tv_ip %></td>
+    </tr>
+    <tr>
+      <td>电视</td>
+      <td><%= @room.tv %></td>
+    </tr>
+    <tr>
+      <td>投影仪</td>
+      <td><%= @room.projector %></td>
+    </tr>
+        <tr>
+      <td>电脑</td>
+      <td><%= @room.pc %></td>
+    </tr>
+    <tr>
+      <td>摄像头</td>
+      <td><%= @room.webcam %></td>
+    </tr>
+    <tr>
+      <td>电话</td>
+      <td><%= @room.tel %></td>
+    </tr>
+    <tr>
+      <td>隔音</td>
+      <td><%= @room.sound_proofing %></td>
+    </tr>
+    <tr>
+      <td>空调</td>
+      <td><%= @room.air_condition %></td>
+    </tr>
+    <tr>
+      <td>白板</td>
+      <td><%= @room.whiteboard %></td>
+    </tr>
+    <tr>
+      <td>最大人数</td>
+      <td><%= @room.max_volume %></td>
+    </tr>
+    <tr>
+      <td>T电话号码</td>
+      <td><%= @room.tel_num %></td>
+    </tr>
+  </table>
+</div>
+<!-- <p id="notice"><%= notice %></p> -->
+
+<%= link_to '修改', edit_room_path(@room),:class=>"btn button" %> &nbsp;&nbsp; |&nbsp;&nbsp;
+<%= link_to '返回', rooms_path,:class=>"btn button" %> 

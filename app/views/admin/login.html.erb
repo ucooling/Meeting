@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>FNST智能会议室预约系统</title>
+    <%= stylesheet_link_tag    "admin/styles", :media => "all" %>
+    <%= stylesheet_link_tag    "admin/jquery-ui-1.8.16.custom", :media => "all" %>
+    <%= stylesheet_link_tag    "admin/keyboard", :media => "all" %>
+    <%= javascript_include_tag    "admin/jquery-1.6.2.min", :media => "all" %>
+    <%= javascript_include_tag    "admin/jquery-ui-1.8.16.custom.min", :media => "all" %>
+    <%= javascript_include_tag    "admin/jquery.keyboard.extension-typing", :media => "all" %>
+    <%= javascript_include_tag    "admin/jquery.keyboard", :media => "all" %>
+    <style type="text/css">
+    .x{
+        margin-top: 150px;
+        height: 350px;
+        width: 1500px;
+        float: left;
+        position: relative;
+        background-image: url(<%= asset_path 'backg.jpg' %>);
+        position:absolute;
+        left: 0px;
+        top:70px;
+    }
+    .fujitsu{
+        background-image: url(<%= asset_path 'fujitsu.jpg' %>);
+        position:absolute;
+        left:100px;
+        top:10px;
+        width:150px;
+        height:80px;
+    }
+    </style>
+</head>
+<body id="login">
+<div class="fujitsu"></div>
+<div class="x">
+    <div id="wrapper" style="margin-left:480px;margin-top:30px;">
+        <div id="content">
+            <div id="header">
+            </div>
+            <div id="darkbanner" class="banner320">
+                <h2>
+                    FNST会议室预约系统</h2>
+            </div>
+            <div id="darkbannerwrap">
+            </div>
+            <%= form_tag "login", :method=>"post" do %>
+                <p>
+                    <%= label_tag :number, "工号：" , :class=>"loginlabel"%>
+                    <%= text_field_tag :number, nil , :class=>"logininput ui-keyboard-input ui-widget-content ui-corner-all", :name=>"number", :id=>"user_name" %>
+                </p>
+                <p>
+                    <%= label_tag  :password ,"密码：" , :class=>"loginlabel" %>
+                    <%= password_field_tag :password, nil ,:class=>"logininput" , :name=>"user_password", :id=>"user_password"%>
+                </p>
+                <div style="margin-left:80px;">
+                <%= submit_tag "登录" , :disable_with => "请等待……" , :style=>"background-color:#f5f5f5;width:60px;" %>
+                </div>
+            <% end %>
+               
+        <div id="wrapperbottom_branding">
+        <div id="wrapperbottom_branding_text">
+           <span style="padding-left:90px;">shaping tomorrow with you ¸富士通南大软件</span></div>
+    </div>
+        </div>
+
+    </div>
+</div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#user_password').keyboard({
+                openOn: null,
+                stayOpen: true,
+                layout: 'qwerty'
+            }).addTyping();
+            $('#passwd').click(function() {
+                $('#user_password').getkeyboard().reveal();
+            })
+
+            $(".logininput").blur(function() {
+                if ($(this).val() == "") {
+                    $(this).css("border-color", "red");
+                                    }
+                else
+                    $(this).css("border-color", "#D9D6C4");
+            })
+
+            $("#loginbtn").click(function() {
+                var k = 0;
+                var ajaxhtml = "";
+                $(".logininput").each(function(i, obj) {
+                    if ($(obj).val().trim() == "") {
+                        k++;
+                        $(this).css("border-color", "red");
+                        $(this).focus();
+                        return false;
+                    }
+                });
+                if (k != 0) return;
+                ajaxhtml = $("#loginbtn").html();
+                $("#loginbtn").html("Loading....  <img src='loading.gif' alt='Announcement' /> ");
+                $("#loginbtn").attr("disabled", "disabled");
+
+            })
+        });
+        
+    </script>
+</body>

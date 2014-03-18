@@ -1,0 +1,57 @@
+<div style="margin-top:50px;margin-left:130px;">
+<%= form_tag "modifypwd", :method=>"post" do %>
+  <table>
+  	<tr>
+  		<td><%= label_tag :name ,"用户姓名：" %></td>
+  		<td><%= text_field_tag :name , @user.name ,:readonly=>true %></td>
+  	</tr>
+  	<tr>
+  		<td><%= label_tag :number , "用户工号：" %></td>
+  		<td><%= text_field_tag :number , @user.number , :readonly=>true %></td>
+  	</tr>
+  	<tr>
+  		<td><%= label_tag :password1 , "新的密码：" %></td>
+  		<td><%= password_field_tag :password1,"",:class=>"psw1" %></td>
+  	</tr>
+  	<tr>
+  		<td><%= label_tag :password2 , "密码确认：" %></td>
+  		<td><%= password_field_tag :password2,"",:class=>"psw2"  %></td>
+  		<!-- <td style="color: red"><%= @error%><%= @ok%></td> -->
+  	</tr>
+  	<tr>
+      <td></td>
+    	<td>
+    		<%= submit_tag "修改" ,:name => "btnchgpwd",:class => 'btn', :id=>"password_pass" %>
+    	</td>      
+    </tr>
+    <tr>
+      <td></td>
+      <td class="error1" style="color:red"></td>
+    </tr>
+  </table>
+<% end %>
+</div>
+<script type="text/javascript">
+  $(function(){
+    $("#password_pass").click(function(){
+      var psw1=$(".psw1").val()
+      var psw2=$(".psw2").val()
+      if(psw1=="" || psw2==""){
+        $(".error1")[0].innerHTML="密码不能为空！";
+        return false;
+      }
+      if(psw1!=psw2){
+        $(".error1")[0].innerHTML="两次输入密码不一致！";
+        return false;       
+      }
+      else if(psw1.length<6){
+        $(".error1")[0].innerHTML="密码不得少于六位！";
+        return false;
+      }
+      else{
+        $(".error1")[0].innerHTML="密码修改成功！";
+        return true;
+      }
+    })
+  })
+</script>

@@ -1,0 +1,133 @@
+<script>
+  $(document).ready(function() {
+    $(".btnnew").click(function(){
+        if($(".add_schedule_name").val().trim()=="" ){
+           $(".add_schedule_name").focus();
+           $(".add_schedule_name").attr("placeholder","会议主题不能为空");
+           return false;         
+        }
+        if($(".datepicker").val().trim()==""){
+            $(".datepicker").focus();
+            $(".datepicker").attr("placeholder","日期不能为空");
+            return false; 
+        }
+    });
+   $(".btnnew").click(function(){{
+     var start_time = $(".start_time").val()
+    var start_time_hour = start_time.substr(0,2);
+    var start_time_minute = start_time.substr(2,1);
+    var end_time = $(".end_time").val();
+    var end_time_hour = end_time.substr(0,2);
+    var end_time_minute = end_time.substr(3,1);
+    if(end_time_hour<start_time_hour)
+    {
+        return false;
+        alert("日期选择不符合规范");
+    }
+    else if(end_time_hour==start_time_hour)
+    {
+        if(end_time_minute<=start_time_minute){
+            return false;
+            alert("日期选择不符合规范");
+        }
+    }
+    else
+    {
+        return true;
+    }
+   });
+    
+  });
+</script>
+<%= form_tag "loop_add_schedule", :method=>"post" do %>
+<div style="margin-top:60px;margin-left:120px;">
+  <table>
+    <tr>
+	    <td>
+	      <%= label_tag :room_name , "会议室："%>	        
+	    </td>
+	    <td>
+	      <%= select_tag(:room_name, options_for_select(@rooms, "W201")) %>(<span style="color:red;">**</span>)
+	    </td>
+    </tr>
+    <tr>
+    	<td>
+    	  <%= label_tag :title , "会议名称："%>
+    	</td>
+    	<td>
+    		<%= text_field_tag :title , " ",:class=>"add_schedule_name" %>(<span style="color:red;">**</span>)
+    	</td>
+    </tr>
+    <tr>
+    	<td>
+    	  <%= label_tag :schedule_day , "日期选择："%>
+    	</td>
+    	<td>
+    		<%= text_field_tag :schedule_day , "" , :class=>"datepicker" %>(<span style="color:red;">**</span>)
+    	</td>
+    </tr>
+    <tr>
+    	<td>
+    	  <%= label_tag :start_time , "开始时间："%>
+    	</td>
+    	<td>
+    		 <%= select_tag :start_time, options_for_select([ "8:00", "8:30", "9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30"], "8:00") , :class=>"start_time"%>(<span style="color:red;">**</span>)
+    	</td>
+    </tr>
+    <tr>
+    	<td>
+    	  <%= label_tag :end_time , "结束时间："%>
+    	</td>
+    	<td>
+    		<%= select_tag :end_time, options_for_select(["8:30", "9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00"], "9:00") , :class=>"end_time" %>(<span style="color:red;">**</span>)
+    	</td>
+    </tr>
+    <tr>
+    	<td>
+    	  <%= label_tag :comment , "备注："%>
+    	</td>
+    	<td>
+    		<%= text_area_tag :comment %>
+    	</td>
+    </tr>
+    <tr>
+    	<td>
+    		<%= submit_tag "预定" ,:class => 'btn', :name => "btnloop", :class=>"btnnew"%>
+    	</td>
+    	<td>
+    		<font style="color: green"><%= @ok%><%= @error%></font>
+    	</td>
+    </tr>
+  </table>
+  <div class="errorff" style="display:block;">
+      
+  </div>
+</div>
+<div style="margin-left: 470px;margin-top: -320px;">
+	<table>
+		<tr>
+			<th><span class="label label-info">=高级选项=</span></td>
+		</tr>
+		<tr>
+			<td><%= label_tag :looptype , "重复："%></td>
+			<td><%= select_tag(:looptype, options_for_select(["每周"], "")) %></td>
+		</tr>
+		<tr>
+			<td><%= label_tag :looptime , "重复频率："%></td>
+			<td><%= select_tag(:looptime, options_for_select(["2", "3","4","5","6","7","8","9","10","11","12","13","14","15"], "")) %></td>
+		</tr>
+		<tr>
+			<td><%= label_tag :loopday , "重复时间："%></td>		
+			<% @week.each do |w|%>
+			<td class="checkbox inline">
+				<%= check_box_tag("loopday[]",@i) %>
+				<%= label_tag("loopday[]", w) %>
+				<% @i = @i + 1%>
+			</td>
+			<% end%>						
+		</tr>
+	</table>
+</div>
+<% end %>
+
+

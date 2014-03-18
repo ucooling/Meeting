@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  room_name: MyString
+  room_floor: 1
+  tv_ip: MyString
+  tv: false
+  projector: false
+  pc: false
+  webcam: false
+  tel: false
+  sound_proofing: false
+  air_condition: false
+  whiteboard: false
+  max_volume: 1
+  tel_num: MyString
+
+two:
+  room_name: MyString
+  room_floor: 1
+  tv_ip: MyString
+  tv: false
+  projector: false
+  pc: false
+  webcam: false
+  tel: false
+  sound_proofing: false
+  air_condition: false
+  whiteboard: false
+  max_volume: 1
+  tel_num: MyString

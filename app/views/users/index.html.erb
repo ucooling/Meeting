@@ -1,0 +1,44 @@
+
+<table class="table table-bordered table-hover">
+  <tr>
+    <th>工号</th>
+    <th>姓名</th>
+    <th>邮件</th>
+    <th>Tel</th>
+    <th>事业部</th>
+    <th>开发部</th>
+    <th>特权用户</th>
+<!--     <th>职位</th>
+    <th>人员类型</th> -->
+    <th colspan="3" style="text-align:center;">操作</th>
+
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.number %></td>
+    <td><%= user.name %></td>
+    <td><%= user.email %></td>
+    <td><%= user.tel %></td>
+    <td><%= user[:b_department_name] %></td>
+    <td><%= user[:d_department_name] %></td>
+    <td><%= user.superuser %></td>
+<!--     <td><%= user[:position_name] %></td>
+    <td><%= user[:user_type_name] %></td> -->
+    <td><%= link_to 'Show', user %></td>
+    <td><%= link_to 'Edit', edit_user_path(user) %></td>
+    <!-- <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+    <td><a href="/users/destroy?id=<%= user.id %>">Destroy</a></td>
+  </tr>
+<% end %>
+</table>
+<div style="text-align: center;color: gray">
+    <div class="digg_pagination">
+        <div class="page_info">
+            共找到<%=@users.total_entries %>条记录,共<%= @users.total_pages%>页
+        </div> 
+        <%= will_paginate @users ,:container => false,:previous_label => '<<上一页', :next_label => '下一页>>' %>
+    </div>  
+</div>
+
+<%= link_to '添加新用户', new_user_path , :class=>"btn button" %>
